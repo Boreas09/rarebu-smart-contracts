@@ -9,6 +9,8 @@ contract AuctionFactory is Initializable {
     address private operator; // tüm auctionlarda yönetim yetkisi olacak operatör.
     bool private isAuctionsOnline; // auctionları kapatıp açabilmeye yarıyor.
 
+    mapping(address => mapping(uint256 => address)) public auctionList; // tokenAddr -> tokenId -> auction address
+
     function initialize(uint256 fee, address op) public initializer {
         auctionFee = fee;
         operator = op;
