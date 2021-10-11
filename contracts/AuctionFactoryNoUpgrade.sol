@@ -2,15 +2,14 @@ pragma solidity ^0.8.9;
 
 // SPDX-License-Identifier: MIT
 
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./AuctionBEP20.sol";
 import "./INFTTranferManager.sol";
 
-contract AuctionFactory is Initializable, OwnableUpgradeable {
+contract AuctionFactory is Ownable {
     using SafeMath for uint256;
     uint256 private auctionFee; // auction sonunda ödenecek olan fee.
     address private operator; // tüm auctionlarda yönetim yetkisi olacak operatör.
@@ -22,7 +21,7 @@ contract AuctionFactory is Initializable, OwnableUpgradeable {
     mapping(address => mapping(uint256 => address)) public auctionList; // tokenAddr -> tokenId -> auction address
     mapping(IERC20 => bool) public allowedToken;
 
-    function initialize(uint256 fee, address op, uint256 length, uint256 maxLength) public initializer {
+    constructor(uint256 fee, address op, uint256 length, uint256 maxLength) {
         auctionFee = fee;
         operator = op;
         minimumAuctionLength = length;

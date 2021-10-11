@@ -1,0 +1,1 @@
+Kontratların test nette kurulup test edilmesi kaldı.
